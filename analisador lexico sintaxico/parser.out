@@ -1,0 +1,415 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> statement_list
+Rule 2     statement_list -> statement
+Rule 3     statement_list -> statement statement_list
+Rule 4     statement -> RESERVED IDENTIFIER OPERATOR NUMBER SEPARATOR
+Rule 5     statement -> IDENTIFIER OPERATOR IDENTIFIER OPERATOR NUMBER SEPARATOR
+Rule 6     statement -> IDENTIFIER OPERATOR IDENTIFIER OPERATOR IDENTIFIER SEPARATOR
+Rule 7     statement -> IDENTIFIER OPERATOR NUMBER SEPARATOR
+Rule 8     statement -> RESERVED SEPARATOR expression SEPARATOR block
+Rule 9     statement -> RESERVED SEPARATOR expression SEPARATOR block RESERVED block
+Rule 10    statement -> RESERVED SEPARATOR expression SEPARATOR block RESERVED statement
+Rule 11    block -> SEPARATOR statement_list SEPARATOR
+Rule 12    block -> SEPARATOR SEPARATOR
+Rule 13    expression -> IDENTIFIER comparison_operator IDENTIFIER
+Rule 14    expression -> IDENTIFIER comparison_operator NUMBER
+Rule 15    comparison_operator -> OPERATOR
+
+Terminals, with rules where they appear
+
+IDENTIFIER           : 4 5 5 6 6 6 7 13 13 14
+NUMBER               : 4 5 7 14
+OPERATOR             : 4 5 5 6 6 7 15
+RESERVED             : 4 8 9 9 10 10
+SEPARATOR            : 4 5 6 7 8 8 9 9 10 10 11 11 12 12
+error                : 
+
+Nonterminals, with rules where they appear
+
+block                : 8 9 9 10
+comparison_operator  : 13 14
+expression           : 8 9 10
+program              : 0
+statement            : 2 3 10
+statement_list       : 1 3 11
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . statement_list
+    (2) statement_list -> . statement
+    (3) statement_list -> . statement statement_list
+    (4) statement -> . RESERVED IDENTIFIER OPERATOR NUMBER SEPARATOR
+    (5) statement -> . IDENTIFIER OPERATOR IDENTIFIER OPERATOR NUMBER SEPARATOR
+    (6) statement -> . IDENTIFIER OPERATOR IDENTIFIER OPERATOR IDENTIFIER SEPARATOR
+    (7) statement -> . IDENTIFIER OPERATOR NUMBER SEPARATOR
+    (8) statement -> . RESERVED SEPARATOR expression SEPARATOR block
+    (9) statement -> . RESERVED SEPARATOR expression SEPARATOR block RESERVED block
+    (10) statement -> . RESERVED SEPARATOR expression SEPARATOR block RESERVED statement
+
+    RESERVED        shift and go to state 4
+    IDENTIFIER      shift and go to state 5
+
+    program                        shift and go to state 1
+    statement_list                 shift and go to state 2
+    statement                      shift and go to state 3
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> statement_list .
+
+    $end            reduce using rule 1 (program -> statement_list .)
+
+
+state 3
+
+    (2) statement_list -> statement .
+    (3) statement_list -> statement . statement_list
+    (2) statement_list -> . statement
+    (3) statement_list -> . statement statement_list
+    (4) statement -> . RESERVED IDENTIFIER OPERATOR NUMBER SEPARATOR
+    (5) statement -> . IDENTIFIER OPERATOR IDENTIFIER OPERATOR NUMBER SEPARATOR
+    (6) statement -> . IDENTIFIER OPERATOR IDENTIFIER OPERATOR IDENTIFIER SEPARATOR
+    (7) statement -> . IDENTIFIER OPERATOR NUMBER SEPARATOR
+    (8) statement -> . RESERVED SEPARATOR expression SEPARATOR block
+    (9) statement -> . RESERVED SEPARATOR expression SEPARATOR block RESERVED block
+    (10) statement -> . RESERVED SEPARATOR expression SEPARATOR block RESERVED statement
+
+    $end            reduce using rule 2 (statement_list -> statement .)
+    SEPARATOR       reduce using rule 2 (statement_list -> statement .)
+    RESERVED        shift and go to state 4
+    IDENTIFIER      shift and go to state 5
+
+    statement                      shift and go to state 3
+    statement_list                 shift and go to state 6
+
+state 4
+
+    (4) statement -> RESERVED . IDENTIFIER OPERATOR NUMBER SEPARATOR
+    (8) statement -> RESERVED . SEPARATOR expression SEPARATOR block
+    (9) statement -> RESERVED . SEPARATOR expression SEPARATOR block RESERVED block
+    (10) statement -> RESERVED . SEPARATOR expression SEPARATOR block RESERVED statement
+
+    IDENTIFIER      shift and go to state 7
+    SEPARATOR       shift and go to state 8
+
+
+state 5
+
+    (5) statement -> IDENTIFIER . OPERATOR IDENTIFIER OPERATOR NUMBER SEPARATOR
+    (6) statement -> IDENTIFIER . OPERATOR IDENTIFIER OPERATOR IDENTIFIER SEPARATOR
+    (7) statement -> IDENTIFIER . OPERATOR NUMBER SEPARATOR
+
+    OPERATOR        shift and go to state 9
+
+
+state 6
+
+    (3) statement_list -> statement statement_list .
+
+    $end            reduce using rule 3 (statement_list -> statement statement_list .)
+    SEPARATOR       reduce using rule 3 (statement_list -> statement statement_list .)
+
+
+state 7
+
+    (4) statement -> RESERVED IDENTIFIER . OPERATOR NUMBER SEPARATOR
+
+    OPERATOR        shift and go to state 10
+
+
+state 8
+
+    (8) statement -> RESERVED SEPARATOR . expression SEPARATOR block
+    (9) statement -> RESERVED SEPARATOR . expression SEPARATOR block RESERVED block
+    (10) statement -> RESERVED SEPARATOR . expression SEPARATOR block RESERVED statement
+    (13) expression -> . IDENTIFIER comparison_operator IDENTIFIER
+    (14) expression -> . IDENTIFIER comparison_operator NUMBER
+
+    IDENTIFIER      shift and go to state 12
+
+    expression                     shift and go to state 11
+
+state 9
+
+    (5) statement -> IDENTIFIER OPERATOR . IDENTIFIER OPERATOR NUMBER SEPARATOR
+    (6) statement -> IDENTIFIER OPERATOR . IDENTIFIER OPERATOR IDENTIFIER SEPARATOR
+    (7) statement -> IDENTIFIER OPERATOR . NUMBER SEPARATOR
+
+    IDENTIFIER      shift and go to state 13
+    NUMBER          shift and go to state 14
+
+
+state 10
+
+    (4) statement -> RESERVED IDENTIFIER OPERATOR . NUMBER SEPARATOR
+
+    NUMBER          shift and go to state 15
+
+
+state 11
+
+    (8) statement -> RESERVED SEPARATOR expression . SEPARATOR block
+    (9) statement -> RESERVED SEPARATOR expression . SEPARATOR block RESERVED block
+    (10) statement -> RESERVED SEPARATOR expression . SEPARATOR block RESERVED statement
+
+    SEPARATOR       shift and go to state 16
+
+
+state 12
+
+    (13) expression -> IDENTIFIER . comparison_operator IDENTIFIER
+    (14) expression -> IDENTIFIER . comparison_operator NUMBER
+    (15) comparison_operator -> . OPERATOR
+
+    OPERATOR        shift and go to state 18
+
+    comparison_operator            shift and go to state 17
+
+state 13
+
+    (5) statement -> IDENTIFIER OPERATOR IDENTIFIER . OPERATOR NUMBER SEPARATOR
+    (6) statement -> IDENTIFIER OPERATOR IDENTIFIER . OPERATOR IDENTIFIER SEPARATOR
+
+    OPERATOR        shift and go to state 19
+
+
+state 14
+
+    (7) statement -> IDENTIFIER OPERATOR NUMBER . SEPARATOR
+
+    SEPARATOR       shift and go to state 20
+
+
+state 15
+
+    (4) statement -> RESERVED IDENTIFIER OPERATOR NUMBER . SEPARATOR
+
+    SEPARATOR       shift and go to state 21
+
+
+state 16
+
+    (8) statement -> RESERVED SEPARATOR expression SEPARATOR . block
+    (9) statement -> RESERVED SEPARATOR expression SEPARATOR . block RESERVED block
+    (10) statement -> RESERVED SEPARATOR expression SEPARATOR . block RESERVED statement
+    (11) block -> . SEPARATOR statement_list SEPARATOR
+    (12) block -> . SEPARATOR SEPARATOR
+
+    SEPARATOR       shift and go to state 22
+
+    block                          shift and go to state 23
+
+state 17
+
+    (13) expression -> IDENTIFIER comparison_operator . IDENTIFIER
+    (14) expression -> IDENTIFIER comparison_operator . NUMBER
+
+    IDENTIFIER      shift and go to state 24
+    NUMBER          shift and go to state 25
+
+
+state 18
+
+    (15) comparison_operator -> OPERATOR .
+
+    IDENTIFIER      reduce using rule 15 (comparison_operator -> OPERATOR .)
+    NUMBER          reduce using rule 15 (comparison_operator -> OPERATOR .)
+
+
+state 19
+
+    (5) statement -> IDENTIFIER OPERATOR IDENTIFIER OPERATOR . NUMBER SEPARATOR
+    (6) statement -> IDENTIFIER OPERATOR IDENTIFIER OPERATOR . IDENTIFIER SEPARATOR
+
+    NUMBER          shift and go to state 27
+    IDENTIFIER      shift and go to state 26
+
+
+state 20
+
+    (7) statement -> IDENTIFIER OPERATOR NUMBER SEPARATOR .
+
+    RESERVED        reduce using rule 7 (statement -> IDENTIFIER OPERATOR NUMBER SEPARATOR .)
+    IDENTIFIER      reduce using rule 7 (statement -> IDENTIFIER OPERATOR NUMBER SEPARATOR .)
+    $end            reduce using rule 7 (statement -> IDENTIFIER OPERATOR NUMBER SEPARATOR .)
+    SEPARATOR       reduce using rule 7 (statement -> IDENTIFIER OPERATOR NUMBER SEPARATOR .)
+
+
+state 21
+
+    (4) statement -> RESERVED IDENTIFIER OPERATOR NUMBER SEPARATOR .
+
+    RESERVED        reduce using rule 4 (statement -> RESERVED IDENTIFIER OPERATOR NUMBER SEPARATOR .)
+    IDENTIFIER      reduce using rule 4 (statement -> RESERVED IDENTIFIER OPERATOR NUMBER SEPARATOR .)
+    $end            reduce using rule 4 (statement -> RESERVED IDENTIFIER OPERATOR NUMBER SEPARATOR .)
+    SEPARATOR       reduce using rule 4 (statement -> RESERVED IDENTIFIER OPERATOR NUMBER SEPARATOR .)
+
+
+state 22
+
+    (11) block -> SEPARATOR . statement_list SEPARATOR
+    (12) block -> SEPARATOR . SEPARATOR
+    (2) statement_list -> . statement
+    (3) statement_list -> . statement statement_list
+    (4) statement -> . RESERVED IDENTIFIER OPERATOR NUMBER SEPARATOR
+    (5) statement -> . IDENTIFIER OPERATOR IDENTIFIER OPERATOR NUMBER SEPARATOR
+    (6) statement -> . IDENTIFIER OPERATOR IDENTIFIER OPERATOR IDENTIFIER SEPARATOR
+    (7) statement -> . IDENTIFIER OPERATOR NUMBER SEPARATOR
+    (8) statement -> . RESERVED SEPARATOR expression SEPARATOR block
+    (9) statement -> . RESERVED SEPARATOR expression SEPARATOR block RESERVED block
+    (10) statement -> . RESERVED SEPARATOR expression SEPARATOR block RESERVED statement
+
+    SEPARATOR       shift and go to state 28
+    RESERVED        shift and go to state 4
+    IDENTIFIER      shift and go to state 5
+
+    statement_list                 shift and go to state 29
+    statement                      shift and go to state 3
+
+state 23
+
+    (8) statement -> RESERVED SEPARATOR expression SEPARATOR block .
+    (9) statement -> RESERVED SEPARATOR expression SEPARATOR block . RESERVED block
+    (10) statement -> RESERVED SEPARATOR expression SEPARATOR block . RESERVED statement
+
+  ! shift/reduce conflict for RESERVED resolved as shift
+    IDENTIFIER      reduce using rule 8 (statement -> RESERVED SEPARATOR expression SEPARATOR block .)
+    $end            reduce using rule 8 (statement -> RESERVED SEPARATOR expression SEPARATOR block .)
+    SEPARATOR       reduce using rule 8 (statement -> RESERVED SEPARATOR expression SEPARATOR block .)
+    RESERVED        shift and go to state 30
+
+  ! RESERVED        [ reduce using rule 8 (statement -> RESERVED SEPARATOR expression SEPARATOR block .) ]
+
+
+state 24
+
+    (13) expression -> IDENTIFIER comparison_operator IDENTIFIER .
+
+    SEPARATOR       reduce using rule 13 (expression -> IDENTIFIER comparison_operator IDENTIFIER .)
+
+
+state 25
+
+    (14) expression -> IDENTIFIER comparison_operator NUMBER .
+
+    SEPARATOR       reduce using rule 14 (expression -> IDENTIFIER comparison_operator NUMBER .)
+
+
+state 26
+
+    (6) statement -> IDENTIFIER OPERATOR IDENTIFIER OPERATOR IDENTIFIER . SEPARATOR
+
+    SEPARATOR       shift and go to state 31
+
+
+state 27
+
+    (5) statement -> IDENTIFIER OPERATOR IDENTIFIER OPERATOR NUMBER . SEPARATOR
+
+    SEPARATOR       shift and go to state 32
+
+
+state 28
+
+    (12) block -> SEPARATOR SEPARATOR .
+
+    RESERVED        reduce using rule 12 (block -> SEPARATOR SEPARATOR .)
+    IDENTIFIER      reduce using rule 12 (block -> SEPARATOR SEPARATOR .)
+    $end            reduce using rule 12 (block -> SEPARATOR SEPARATOR .)
+    SEPARATOR       reduce using rule 12 (block -> SEPARATOR SEPARATOR .)
+
+
+state 29
+
+    (11) block -> SEPARATOR statement_list . SEPARATOR
+
+    SEPARATOR       shift and go to state 33
+
+
+state 30
+
+    (9) statement -> RESERVED SEPARATOR expression SEPARATOR block RESERVED . block
+    (10) statement -> RESERVED SEPARATOR expression SEPARATOR block RESERVED . statement
+    (11) block -> . SEPARATOR statement_list SEPARATOR
+    (12) block -> . SEPARATOR SEPARATOR
+    (4) statement -> . RESERVED IDENTIFIER OPERATOR NUMBER SEPARATOR
+    (5) statement -> . IDENTIFIER OPERATOR IDENTIFIER OPERATOR NUMBER SEPARATOR
+    (6) statement -> . IDENTIFIER OPERATOR IDENTIFIER OPERATOR IDENTIFIER SEPARATOR
+    (7) statement -> . IDENTIFIER OPERATOR NUMBER SEPARATOR
+    (8) statement -> . RESERVED SEPARATOR expression SEPARATOR block
+    (9) statement -> . RESERVED SEPARATOR expression SEPARATOR block RESERVED block
+    (10) statement -> . RESERVED SEPARATOR expression SEPARATOR block RESERVED statement
+
+    SEPARATOR       shift and go to state 22
+    RESERVED        shift and go to state 4
+    IDENTIFIER      shift and go to state 5
+
+    block                          shift and go to state 34
+    statement                      shift and go to state 35
+
+state 31
+
+    (6) statement -> IDENTIFIER OPERATOR IDENTIFIER OPERATOR IDENTIFIER SEPARATOR .
+
+    RESERVED        reduce using rule 6 (statement -> IDENTIFIER OPERATOR IDENTIFIER OPERATOR IDENTIFIER SEPARATOR .)
+    IDENTIFIER      reduce using rule 6 (statement -> IDENTIFIER OPERATOR IDENTIFIER OPERATOR IDENTIFIER SEPARATOR .)
+    $end            reduce using rule 6 (statement -> IDENTIFIER OPERATOR IDENTIFIER OPERATOR IDENTIFIER SEPARATOR .)
+    SEPARATOR       reduce using rule 6 (statement -> IDENTIFIER OPERATOR IDENTIFIER OPERATOR IDENTIFIER SEPARATOR .)
+
+
+state 32
+
+    (5) statement -> IDENTIFIER OPERATOR IDENTIFIER OPERATOR NUMBER SEPARATOR .
+
+    RESERVED        reduce using rule 5 (statement -> IDENTIFIER OPERATOR IDENTIFIER OPERATOR NUMBER SEPARATOR .)
+    IDENTIFIER      reduce using rule 5 (statement -> IDENTIFIER OPERATOR IDENTIFIER OPERATOR NUMBER SEPARATOR .)
+    $end            reduce using rule 5 (statement -> IDENTIFIER OPERATOR IDENTIFIER OPERATOR NUMBER SEPARATOR .)
+    SEPARATOR       reduce using rule 5 (statement -> IDENTIFIER OPERATOR IDENTIFIER OPERATOR NUMBER SEPARATOR .)
+
+
+state 33
+
+    (11) block -> SEPARATOR statement_list SEPARATOR .
+
+    RESERVED        reduce using rule 11 (block -> SEPARATOR statement_list SEPARATOR .)
+    IDENTIFIER      reduce using rule 11 (block -> SEPARATOR statement_list SEPARATOR .)
+    $end            reduce using rule 11 (block -> SEPARATOR statement_list SEPARATOR .)
+    SEPARATOR       reduce using rule 11 (block -> SEPARATOR statement_list SEPARATOR .)
+
+
+state 34
+
+    (9) statement -> RESERVED SEPARATOR expression SEPARATOR block RESERVED block .
+
+    RESERVED        reduce using rule 9 (statement -> RESERVED SEPARATOR expression SEPARATOR block RESERVED block .)
+    IDENTIFIER      reduce using rule 9 (statement -> RESERVED SEPARATOR expression SEPARATOR block RESERVED block .)
+    $end            reduce using rule 9 (statement -> RESERVED SEPARATOR expression SEPARATOR block RESERVED block .)
+    SEPARATOR       reduce using rule 9 (statement -> RESERVED SEPARATOR expression SEPARATOR block RESERVED block .)
+
+
+state 35
+
+    (10) statement -> RESERVED SEPARATOR expression SEPARATOR block RESERVED statement .
+
+    RESERVED        reduce using rule 10 (statement -> RESERVED SEPARATOR expression SEPARATOR block RESERVED statement .)
+    IDENTIFIER      reduce using rule 10 (statement -> RESERVED SEPARATOR expression SEPARATOR block RESERVED statement .)
+    $end            reduce using rule 10 (statement -> RESERVED SEPARATOR expression SEPARATOR block RESERVED statement .)
+    SEPARATOR       reduce using rule 10 (statement -> RESERVED SEPARATOR expression SEPARATOR block RESERVED statement .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for RESERVED in state 23 resolved as shift
